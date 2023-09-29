@@ -12,10 +12,17 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+import configparser
+
+# Config parser is used to read db configuration from a .ini file to avoid hardcoding db credentials
+config = configparser.ConfigParser()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+dbconfig_path = Path(BASE_DIR, "dbconfig.ini")
+
+config.read(dbconfig_path)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -78,11 +85,11 @@ WSGI_APPLICATION = "eotm_backend.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "eotm",
-        "USER": "eotm_user",
-        "PASSWORD": "Admin123**",
-        "HOST": "localhost",
-        "PORT": "5432",
+        "NAME": config["database"]["name"],
+        "USER":  config["database"]["user"],
+        "PASSWORD":  config["database"]["password"],
+        "HOST":  config["database"]["host"],
+        "PORT":  config["database"]["port"],
     }
 }
 
