@@ -85,11 +85,11 @@ WSGI_APPLICATION = "eotm_backend.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": config["database"]["name"],
-        "USER":  config["database"]["user"],
-        "PASSWORD":  config["database"]["password"],
-        "HOST":  config["database"]["host"],
-        "PORT":  config["database"]["port"],
+        "NAME": config["pg-database"]["name"],
+        "USER":  config["pg-database"]["user"],
+        "PASSWORD":  config["pg-database"]["password"],
+        "HOST":  config["pg-database"]["host"],
+        "PORT":  config["pg-database"]["port"],
     }
 }
 
