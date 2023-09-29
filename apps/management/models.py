@@ -7,16 +7,17 @@ class Employee(AbstractUser):
     total_recommends = models.PositiveIntegerField(default=0)
     current_month_recommends = models.PositiveIntegerField(default=0)
     eotm_wins = models.PositiveIntegerField(default=0)
-    is_eotm = models.BooleanField(name="Employee of the month", default=False)
+    is_eotm = models.BooleanField(
+        default=False, verbose_name="Employee of the month")
     image = models.ImageField(null=True, blank=True)
     image_url = models.CharField(max_length=200, null=True, blank=True)
-
-    def __str__(self) -> str:
-        return self.username
 
     class Meta:
         verbose_name = "Employee"
         verbose_name_plural = "Employees"
+
+    def __str__(self) -> str:
+        return self.username
 
     # Functionality to assert that only one employee is EOTM:
 
