@@ -82,7 +82,7 @@ DATABASES = {
         "USER": "eotm_user",
         "PASSWORD": "Admin123**",
         "HOST": "localhost",
-        "POST": "5432",
+        "PORT": "5432",
     }
 }
 
