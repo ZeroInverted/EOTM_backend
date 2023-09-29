@@ -162,3 +162,7 @@ cython_debug/
 #db config
 
 *.ini
+
+#vscode settings
+
+.vscode
