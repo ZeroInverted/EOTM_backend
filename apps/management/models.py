@@ -6,7 +6,8 @@ class Employee(AbstractUser):
     job_title = models.CharField(max_length=128, null=True)
     total_recommends = models.PositiveIntegerField(default=0)
     current_month_recommends = models.PositiveIntegerField(default=0)
-    eotm_wins = models.PositiveIntegerField(default=0)
+    eotm_wins = models.PositiveIntegerField(
+        default=0, verbose_name="EOTM Wins")
     is_eotm = models.BooleanField(
         default=False, verbose_name="Employee of the month")
     image = models.ImageField(null=True, blank=True)
@@ -27,5 +28,6 @@ class Employee(AbstractUser):
         if self.is_eotm:
             Employee.objects.filter(is_eotm=True).exclude(
                 pk=self.pk).update(is_eotm=False)
+            self.eotm_wins += 1
 
         super().save(*args, **kwargs)
