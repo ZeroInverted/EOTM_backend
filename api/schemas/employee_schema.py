@@ -6,6 +6,7 @@ class EmployeeBase(BaseModel):
     last_name: str
     job_title: str
     current_month_recommends: int
+    total_recommends: int
     eotm_wins: int
     is_eotm: bool
     image_url: str
