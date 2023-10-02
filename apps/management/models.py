@@ -34,6 +34,7 @@ class Employee(AbstractUser):
 
 
 class EOTMDetail(models.Model):
-    commentor_id = models.ForeignKey(Employee, on_delete=models.CASCADE)
-    comment_detail = models.TextField(max_length=600)
-    number_of_likes = models.PositiveIntegerField(null=True, blank=True)
+    commentor = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    comment_detail = models.TextField(max_length=600, null=True, blank=True)
+    number_of_likes = models.PositiveIntegerField(
+        default=0, null=True, blank=True)

@@ -1,5 +1,5 @@
-from sqlalchemy import Column, Integer, String, Boolean
-from sqlalchemy.orm import declarative_base
+from sqlalchemy import Column, Integer, String, Boolean, ForeignKey
+from sqlalchemy.orm import declarative_base, relationship
 
 Base = declarative_base()
 
@@ -21,3 +21,16 @@ class SQLAlchemyEmployee(Base):
     eotm_wins = Integer()
     is_eotm = Boolean()
     image_url = String(length=200)
+    sa_eotmdetails = relationship(
+        "SQLAlchemyEOTMDetail", back_populates="sa_employee")
+
+
+class SQLAlchemyEOTMDetail(Base):
+    __tablename__ = "management_eotmdetail"
+    id = Column(Integer, primary_key=True)
+    comment_detail = String(length=600)
+    number_of_likes = Integer()
+    commentor_id = Column(Integer, ForeignKey("management_employee.id"))
+
+    sa_employee = relationship(
+        "SQLAlchemyEmployee", back_populates="sa_eotmdetails")
