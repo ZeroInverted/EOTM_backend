@@ -2,7 +2,6 @@ from fastapi import APIRouter, Depends
 from database import get_db
 from sqlalchemy.orm import Session
 from services.employee_service import get_eotm, get_hall_of_fame
-from schemas.employee_schema import SAEmployee, EmployeeInput
 from schemas.response_schema import APIResponse
 
 employee_router = APIRouter()
