@@ -31,3 +31,9 @@ class Employee(AbstractUser):
             self.eotm_wins += 1
 
         super().save(*args, **kwargs)
+
+
+class EOTMDetail(models.Model):
+    commentor_id = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    comment_detail = models.TextField(max_length=600)
+    number_of_likes = models.PositiveIntegerField(null=True, blank=True)
