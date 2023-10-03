@@ -6,7 +6,7 @@ from sqlalchemy.exc import SQLAlchemyError
 from fastapi import HTTPException
 
 
-def get_eotm(db: Session) -> APIResponse:
+def get_eotm_data(db: Session) -> APIResponse:
     try:
         eotm = db.query(SQLAlchemyEmployee).filter(
             SQLAlchemyEmployee.is_eotm == True)
@@ -26,7 +26,7 @@ def get_eotm(db: Session) -> APIResponse:
         return APIResponse(success=False, messages=error, status_code=500)
 
 
-def get_hall_of_fame(db: Session, type: str = "wins", no_limit: int = 5) -> APIResponse:
+def get_hof_data(db: Session, type: str = "wins", no_limit: int = 5) -> APIResponse:
     try:
         if (type == "wins"):
             hof = db.query(SQLAlchemyEmployee).order_by(
