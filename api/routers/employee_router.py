@@ -12,6 +12,6 @@ def get_eotm(db: Session = Depends(get_db)):
     return get_eotm_data(db)
 
 
-@employee_router.post("/get_hof", response_model=APIResponse)
+@employee_router.get("/get_hof", response_model=APIResponse)
 def get_hof(db: Session = Depends(get_db), query_type: str = "wins", number_limit: int = 5):
     return get_hof_data(db, type=query_type, no_limit=number_limit)
