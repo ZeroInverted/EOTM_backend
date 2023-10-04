@@ -14,7 +14,7 @@ dbconfig_path = Path(BASE_DIR, "dbconfig.ini")
 config.read(dbconfig_path)
 
 
-DATABASE_URL = f'postgresql://{config["pg-database"]["user"]}:{config["pg-database"]["password"]}@{config["pg-database"]["host"]}:{config["pg-database"]["port"]}/{config["pg-database"]["host"]}'
+DATABASE_URL = f'postgresql://{config["pg-database"]["user"]}:{config["pg-database"]["password"]}@{config["pg-database"]["host"]}:{config["pg-database"]["port"]}/{config["pg-database"]["name"]}'
 
 engine = create_engine(DATABASE_URL)
 
