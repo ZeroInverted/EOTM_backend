@@ -10,6 +10,7 @@ class Employee(AbstractUser):
         default=0, verbose_name="EOTM Wins")
     is_eotm = models.BooleanField(
         default=False, verbose_name="Employee of the month")
+    number_of_likes = models.PositiveIntegerField(default=0)
     image = models.ImageField(null=True, blank=True)
     image_url = models.CharField(max_length=200, null=True, blank=True)
 
@@ -34,7 +35,5 @@ class Employee(AbstractUser):
 
 
 class EOTMDetail(models.Model):
-    commentor = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    commentor = models.TextField(max_length=255)
     comment_detail = models.TextField(max_length=600, null=True, blank=True)
-    number_of_likes = models.PositiveIntegerField(
-        default=0, null=True, blank=True)
