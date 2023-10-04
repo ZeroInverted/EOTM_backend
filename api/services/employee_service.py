@@ -1,4 +1,5 @@
 from schemas.response_schema import APIResponse
+from schemas.employee_schema import SAEmployee
 from models.employee_model import SQLAlchemyEmployee
 from sqlalchemy.orm import Session
 from sqlalchemy import desc
@@ -6,12 +7,12 @@ from sqlalchemy.exc import SQLAlchemyError
 from fastapi import HTTPException
 
 
-def get_eotm_data(db: Session) -> APIResponse:
+def get_eotm_data(db: Session) -> list[SAEmployee] | APIResponse:
     try:
         eotm = db.query(SQLAlchemyEmployee).filter(
             SQLAlchemyEmployee.is_eotm == True)
         if eotm:
-            return APIResponse(success=True, results=list(eotm), status_code=200)
+            return list(eotm)
         else:
             error = ["Employee of The Month not found"]
             return APIResponse(success=False, messages=error, status_code=404)
