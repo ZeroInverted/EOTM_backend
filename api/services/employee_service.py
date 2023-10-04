@@ -7,12 +7,12 @@ from sqlalchemy.exc import SQLAlchemyError
 from fastapi import HTTPException
 
 
-def get_eotm_data(db: Session) -> list[SAEmployee] | APIResponse:
+def get_eotm_data(db: Session) -> APIResponse:
     try:
         eotm = db.query(SQLAlchemyEmployee).filter(
             SQLAlchemyEmployee.is_eotm == True)
         if eotm:
-            return list(eotm)
+            return APIResponse(success=True, results=list(eotm))
         else:
             error = ["Employee of The Month not found"]
             return APIResponse(success=False, messages=error, status_code=404)

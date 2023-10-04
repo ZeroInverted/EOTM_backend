@@ -7,12 +7,12 @@ from sqlalchemy.exc import SQLAlchemyError
 from fastapi import HTTPException
 
 
-def get_eotmdetail_data(db: Session) -> list[SAEOTMDetail] | APIResponse:
+def get_eotmdetail_data(db: Session) -> APIResponse:
 
     try:
         eotmdetail = db.query(SQLAlchemyEOTMDetail).all()
         if eotmdetail:
-            return list(eotmdetail)
+            return APIResponse(success=True, results=eotmdetail)
         else:
             error = ["No comments found"]
             return APIResponse(success=False, messages=error, status_code=404)
