@@ -5,7 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 eotm = FastAPI()
 
 eotm.include_router(employee_router, prefix="/employee")
-eotm.include_router(eotmdetail_router, prefix="'/eotmdetail")
+eotm.include_router(eotmdetail_router, prefix="/eotmdetail")
 
 
 origins = ["*"]
