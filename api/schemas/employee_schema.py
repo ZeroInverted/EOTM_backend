@@ -10,7 +10,7 @@ class EmployeeBase(BaseModel):
     number_of_likes: int
     eotm_wins: int
     is_eotm: bool
-    image_url: str
+    image_url: str | None
 
 
 class EmployeeInput(EmployeeBase):
