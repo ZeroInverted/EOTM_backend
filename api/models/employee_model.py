@@ -20,5 +20,4 @@ class SQLAlchemyEmployee(Base):
     eotm_wins = Integer()
     is_eotm = Boolean()
     image_url = String(length=200)
-    sa_eotmdetails = relationship(
-        "SQLAlchemyEOTMDetail", back_populates="sa_employee")
+    number_of_likes = Integer()
