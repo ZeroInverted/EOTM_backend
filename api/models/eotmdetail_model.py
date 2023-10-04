@@ -7,4 +7,4 @@ class SQLAlchemyEOTMDetail(Base):
     __tablename__ = "management_eotmdetail"
     id = Column(Integer, primary_key=True)
     comment_detail = String(length=600)
-    commentor = string(length=255)
+    commentor = String(length=255)
