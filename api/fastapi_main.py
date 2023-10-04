@@ -3,6 +3,7 @@ from routers.employee_router import employee_router
 from routers.eotmdetail_router import eotmdetail_router
 from routers.collective_router import collective_router
 from fastapi.middleware.cors import CORSMiddleware
+import uvicorn
 eotm = FastAPI()
 
 eotm.include_router(employee_router, prefix="/employee")
@@ -18,3 +19,6 @@ eotm.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+if __name__ == "__main__":
+    uvicorn.run(eotm, port=5555)
