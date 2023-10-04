@@ -1,7 +1,7 @@
 from schemas.response_schema import CollectiveResponse
 from sqlalchemy.orm import Session
-from employee_service import get_eotm_data
-from eotmdetail_service import get_eotmdetail_data
+from .employee_service import get_eotm_data
+from .eotmdetail_service import get_eotmdetail_data
 
 
 def get_collective_data(db: Session) -> CollectiveResponse:
