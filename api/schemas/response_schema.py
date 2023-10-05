@@ -1,7 +1,5 @@
 from pydantic import BaseModel
-from .employee_schema import SAEmployee
-from .eotmdetail_schema import SAEOTMDetail
-from typing import Union, TypeVar, Generic, List
+from typing import TypeVar, Generic, List
 
 T = TypeVar("T", bound=BaseModel)
 
