@@ -5,5 +5,5 @@ from database import Base
 class SQLAlchemyEOTMDetail(Base):
     __tablename__ = "management_eotmdetail"
     id = Column(Integer, primary_key=True)
-    comment_detail = String(length=600)
-    commentor = String(length=255)
+    comment_detail = Column(String)
+    commentor = Column(String)
