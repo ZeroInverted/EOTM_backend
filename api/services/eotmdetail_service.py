@@ -29,13 +29,12 @@ def get_eotmdetail_data(db: Session) -> GenericMultipleResponse[SAEOTMDetail]:
 
 
 def post_eotmdetail_data(db: Session, eotmdetail: EOTMDetailInput) -> GenericSingleResponse[SAEOTMDetail]:
-
-    new_eotmdetail = SAEOTMDetail(**(eotmdetail.model_dump()))
     try:
+        new_eotmdetail = SQLAlchemyEOTMDetail(**(eotmdetail.model_dump()))
         db.add(new_eotmdetail)
         db.commit()
         db.refresh(new_eotmdetail)
-        data = GenericSingleObject[SAEOTMDetail](object=data)
+        data = GenericSingleObject[SAEOTMDetail](object=new_eotmdetail)
         return GenericSingleResponse[SAEOTMDetail](success=True, data=data)
     except SQLAlchemyError as e:
         error = [f"Error occurred while querying database: {str(e)}"]
@@ -44,4 +43,5 @@ def post_eotmdetail_data(db: Session, eotmdetail: EOTMDetailInput) -> GenericSin
         error = [f"HTTP exception has occurred: {str(e)}"]
         return GenericSingleResponse[SAEOTMDetail](success=False, messages=error, status_code=403)
     except Exception as e:
+        error = [f"An error has occurred: {str(e)}"]
         return GenericSingleResponse[SAEOTMDetail](success=False, messages=error, status_code=500)
