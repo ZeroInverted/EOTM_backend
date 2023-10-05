@@ -28,7 +28,7 @@ class GenericMultipleResponse(BaseGenericResponse, Generic[T]):
     data: GenericMultipleObjects[T] | None = None
 
 
-class APIResponse(BaseModel):
+class GenericMultipleResponse[SAEOTMDetail](BaseModel):
     success: bool
     results: list[BaseModel] | None = None
     messages: list[str] | None = None

@@ -1,4 +1,4 @@
-from schemas.response_schema import APIResponse, GenericSingleResponse, GenericSingleObject, GenericMultipleObjects, GenericMultipleResponse
+from schemas.response_schema import GenericMultipleResponse[SAEOTMDetail], GenericSingleResponse, GenericSingleObject, GenericMultipleObjects, GenericMultipleResponse
 from schemas.employee_schema import SAEmployee
 from models.employee_model import SQLAlchemyEmployee
 from sqlalchemy.orm import Session
