@@ -3,7 +3,7 @@ from pydantic import BaseModel
 
 class EOTMDetailBase(BaseModel):
     comment_detail: str
-    commentor: int
+    commentor: str
 
 
 class EOTMDetailInput(EOTMDetailBase):
