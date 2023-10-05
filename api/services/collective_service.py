@@ -3,13 +3,13 @@ from sqlalchemy.exc import SQLAlchemyError
 from fastapi import HTTPException
 from models.employee_model import SQLAlchemyEmployee
 from models.eotmdetail_model import SQLAlchemyEOTMDetail
-from schemas.response_schema import GenericMultipleObjects, GenericMultipleResponse, GenericSingleObject, GenericSingleResponse
+from schemas.response_schema import GenericMultipleObjects, GenericMultipleResponse
 from schemas.eotmdetail_schema import EOTMDetailInput, SAEOTMDetail
-from .employee_service import get_eotm_data
-from .eotmdetail_service import get_eotmdetail_data
 
 
 # API architecture as per request of Daniel Habib[Frontend dev]
+
+# As per Daniel's request, this API service returns eotm details and comments
 
 def get_collective_data(db: Session):
     try:
@@ -24,8 +24,11 @@ def get_collective_data(db: Session):
         return collective_dict
     except Exception as e:
         error = f"An error has occurred {str(e)}"
-
-        return error, 500
+        error_dict = {
+            "success": False,
+            "messages": error
+        }
+        return error_dict
 
 
 # As per Daniel's request, when posting a comment, this service returns all comments.
