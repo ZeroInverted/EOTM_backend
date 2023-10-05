@@ -25,7 +25,7 @@ def get_collective_data(db: Session):
     except Exception as e:
         error = f"An error has occurred {str(e)}"
 
-        return error, 505
+        return error, 500
 
 
 # As per Daniel's request, when posting a comment, this service returns all comments.
