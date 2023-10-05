@@ -51,3 +51,37 @@ def get_hof_data(db: Session, type: str = "wins", no_limit: int = 5) -> GenericM
         return GenericMultipleResponse[SAEmployee](success=False, messages=error, status_code=403)
     except Exception as e:
         return GenericMultipleResponse[SAEmployee](success=False, messages=error, status_code=500)
+
+
+# mode = increment or decrement
+def change_like_count(db: Session, mode: str) -> GenericSingleResponse[SAEmployee]:
+    try:
+        eotm = db.query(SQLAlchemyEmployee).filter(
+            SQLAlchemyEmployee.is_eotm == True)
+        if mode == "increment":
+            eotm.update(
+                {SQLAlchemyEmployee.number_of_likes: SQLAlchemyEmployee.number_of_likes+1})
+            db.commit()
+        elif mode == "decrement":
+            eotm.update(
+                {SQLAlchemyEmployee.number_of_likes: SQLAlchemyEmployee.number_of_likes-1})
+            db.commit()
+        else:
+            error = [
+                "Unprocessable entity: query parameter query_mode should be increment or decrement"]
+            return GenericSingleResponse[SAEmployee](success=False, messages=error, status_code=422)
+        data = GenericSingleObject[SAEmployee](object=eotm.first())
+        if eotm:
+            return GenericSingleResponse[SAEmployee](success=True, data=data)
+        else:
+            error = ["Employee of The Month not found"]
+            return GenericSingleResponse[SAEmployee](success=False, messages=error, status_code=404)
+    except SQLAlchemyError as e:
+        error = [f"Error occurred while querying database: {str(e)}"]
+        return GenericSingleResponse[SAEmployee](success=False, messages=error, status_code=500)
+    except HTTPException as e:
+        error = [f"HTTP exception has occurred: {str(e)}"]
+        return GenericSingleResponse[SAEmployee](success=False, messages=error, status_code=403)
+    except Exception as e:
+        error = [f"An error has occurred: {str(e)}"]
+        return GenericSingleResponse[SAEmployee](success=False, messages=error, status_code=500)
