@@ -2,8 +2,8 @@ from fastapi import APIRouter, Depends
 from database import get_db
 from sqlalchemy.orm import Session
 from services.eotmdetail_service import get_eotmdetail_data, post_eotmdetail_data
-from schemas.response_schema import GenericMultipleResponse[SAEOTMDetail]
-from schemas.eotmdetail_schema import EOTMDetailInput
+from schemas.response_schema import GenericMultipleResponse
+from schemas.eotmdetail_schema import EOTMDetailInput, SAEOTMDetail
 
 eotmdetail_router = APIRouter()
 
