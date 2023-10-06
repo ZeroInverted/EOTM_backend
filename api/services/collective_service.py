@@ -23,7 +23,7 @@ def get_collective_data(db: Session):
         }
         return collective_dict
     except Exception as e:
-        error = f"An error has occurred {str(e)}"
+        error = [f"An error has occurred {str(e)}"]
         error_dict = {
             "success": False,
             "messages": error
