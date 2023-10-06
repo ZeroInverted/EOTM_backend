@@ -29,7 +29,9 @@ class Employee(AbstractUser):
         if self.is_eotm:
             Employee.objects.filter(is_eotm=True).exclude(
                 pk=self.pk).update(is_eotm=False)
+            EOTMDetail.objects.all().delete()
             self.eotm_wins += 1
+            self.number_of_likes = 0
 
         super().save(*args, **kwargs)
 
