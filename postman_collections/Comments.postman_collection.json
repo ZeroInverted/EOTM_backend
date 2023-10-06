@@ -1,0 +1,68 @@
+{
+	"info": {
+		"_postman_id": "898a046c-cbd7-4dc1-a569-078d19ea158e",
+		"name": "Comments",
+		"description": "Comments APIs to return all comments and add new ones.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29779843"
+	},
+	"item": [
+		{
+			"name": "Get all comments",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5555/eotmdetail/get_eotmdetail",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5555",
+					"path": [
+						"eotmdetail",
+						"get_eotmdetail"
+					]
+				},
+				"description": "Returns all comments over the current EOTM winner post."
+			},
+			"response": []
+		},
+		{
+			"name": "Add a new comment",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"comment_detail\": \"Commenting for fun\",\r\n  \"commentor\": \"Mr. Commentor\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5555/eotmdetail/add_eotmdetail",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5555",
+					"path": [
+						"eotmdetail",
+						"add_eotmdetail"
+					]
+				},
+				"description": "Adds a new comment on the EOTM winner post."
+			},
+			"response": []
+		}
+	]
+}

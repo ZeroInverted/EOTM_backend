@@ -1,0 +1,102 @@
+{
+	"info": {
+		"_postman_id": "a13fcbe6-e72a-4d34-9804-7b7681b65a21",
+		"name": "Employee",
+		"description": "Employee APIs to return employee of the month and hall of famers.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29779843"
+	},
+	"item": [
+		{
+			"name": "get employee of the month",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5555/employee/get_eotm",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5555",
+					"path": [
+						"employee",
+						"get_eotm"
+					]
+				},
+				"description": "Returns the current winner of the employee of the month spot"
+			},
+			"response": []
+		},
+		{
+			"name": "get hall of famers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5555/employee/get_hof?query_type=wins&number_limit=5",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5555",
+					"path": [
+						"employee",
+						"get_hof"
+					],
+					"query": [
+						{
+							"key": "query_type",
+							"value": "wins",
+							"description": "filter by wins or recommendationm count; default:wins, options: wins / recommends"
+						},
+						{
+							"key": "number_limit",
+							"value": "5",
+							"description": "number of hall of famers to return, default: 5"
+						}
+					]
+				},
+				"description": "Returns a specified number of hall of famers, based on their win counter for the employee of the month title or the count of recommendations they have received by other employees"
+			},
+			"response": []
+		},
+		{
+			"name": "patch like count for eotm",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5555/employee/patch_like_count?query_mode=increment",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5555",
+					"path": [
+						"employee",
+						"patch_like_count"
+					],
+					"query": [
+						{
+							"key": "query_mode",
+							"value": "increment",
+							"description": "mode of operation, acceptable values: increment / decrement"
+						}
+					]
+				},
+				"description": "Increment or decrement the like count over the eotm post"
+			},
+			"response": []
+		}
+	]
+}

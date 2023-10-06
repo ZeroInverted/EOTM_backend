@@ -1,0 +1,68 @@
+{
+	"info": {
+		"_postman_id": "81ad52ee-b73f-44fe-8a12-56736fa60917",
+		"name": "Collective",
+		"description": "API set requested by Daniel Habib \\[Frontend dev\\[",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29779843"
+	},
+	"item": [
+		{
+			"name": "Get Collective EOTM and comment",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5555/collective/get_collective_data",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5555",
+					"path": [
+						"collective",
+						"get_collective_data"
+					]
+				},
+				"description": "Returns a mixture of employee of the month details as well as the comments over the post concatenated."
+			},
+			"response": []
+		},
+		{
+			"name": "Post collective comment",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"comment_detail\": \"This is a comment\",\r\n  \"commentor\": \"Mr. Commentor\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5555/collective/post_collective_comment",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5555",
+					"path": [
+						"collective",
+						"post_collective_comment"
+					]
+				},
+				"description": "Returns all comments upon successful insertion of a new comment."
+			},
+			"response": []
+		}
+	]
+}
