@@ -41,9 +41,9 @@ python fastapi_main
 ```
 
 ## 3.0 API Usage, Architecture
-
+```
 Visit <hostname>:<port>/docs for examples on how to use the APIs. 
-
+```
 Where hostname is the host that the FastAPI server is listening on, and its port.
 
 e.g.,
