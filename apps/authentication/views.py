@@ -14,18 +14,15 @@ class EmployeeLogin(View):
         return JsonResponse({"X-CSRFToken": csrf_token})
     
     def post(self, request):
-        request_data = json.loads(request.body.decode("utf-8"))
+        request_data = json.loads(request.body)
         username = request_data.get("username")
         password = request_data.get("password")
         user = authenticate(request=request, username=username, password=password)
         if user:
             login(request, user)
-            print(f"Logged in successfully! as {user.get_username()}")
         else:
-            print("Login error")
             return JsonResponse({
                 "success": False,
-                "messages": ["Login error"]
             })
         token = jwt.encode({"username": user.get_username()}, settings.SECRET_KEY)
         return JsonResponse({"access_token": token})
