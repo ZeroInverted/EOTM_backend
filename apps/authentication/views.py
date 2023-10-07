@@ -22,7 +22,7 @@ class EmployeeLogin(View):
             login(request, user)
         else:
             return JsonResponse({
-                "success": False,
+                "access_token": None,
             })
         token = jwt.encode({"username": user.get_username()}, settings.SECRET_KEY)
         return JsonResponse({"access_token": token})
