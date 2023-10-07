@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Request
 from database import get_db
 from sqlalchemy.orm import Session
 from services.employee_service import get_eotm_data, get_hof_data, change_like_count
@@ -19,5 +19,5 @@ def get_hof(db: Session = Depends(get_db), query_type: str = "wins", number_limi
 
 
 @employee_router.patch("/patch_like_count", response_model=GenericSingleResponse[SAEmployee])
-def patch_like_count(query_mode: str, db: Session = Depends(get_db)):
-    return change_like_count(db, mode=query_mode)
+def patch_like_count(query_mode: str, request: Request, db: Session = Depends(get_db)):
+    return change_like_count(db, request=request, mode=query_mode)

@@ -1,10 +1,12 @@
 from schemas.response_schema import GenericMultipleResponse, GenericSingleResponse, GenericSingleObject, GenericMultipleObjects, GenericMultipleResponse
 from schemas.employee_schema import SAEmployee
+from services.auth_service import SECRET_KEY
 from models.employee_model import SQLAlchemyEmployee
 from sqlalchemy.orm import Session
 from sqlalchemy import desc
 from sqlalchemy.exc import SQLAlchemyError
-from fastapi import HTTPException
+from fastapi import HTTPException, Request
+import jwt
 
 
 def get_eotm_data(db: Session) -> GenericSingleResponse[SAEmployee]:
@@ -54,28 +56,38 @@ def get_hof_data(db: Session, type: str = "wins", no_limit: int = 5) -> GenericM
 
 
 # mode = increment or decrement
-def change_like_count(db: Session, mode: str) -> GenericSingleResponse[SAEmployee]:
+def change_like_count(db: Session, mode: str, request: Request) -> GenericSingleResponse[SAEmployee]:
     try:
-        eotm = db.query(SQLAlchemyEmployee).filter(
-            SQLAlchemyEmployee.is_eotm == True)
-        if mode == "increment":
-            eotm.update(
-                {SQLAlchemyEmployee.number_of_likes: SQLAlchemyEmployee.number_of_likes+1})
-            db.commit()
-        elif mode == "decrement":
-            eotm.update(
-                {SQLAlchemyEmployee.number_of_likes: SQLAlchemyEmployee.number_of_likes-1})
-            db.commit()
+        access_token = request.headers.get("access_token")
+        if not access_token:
+            error = ["Unauthorized"]
+            return GenericSingleResponse[SAEmployee](success=False, messages=error, status_code=401)
         else:
-            error = [
-                "Unprocessable entity: query parameter query_mode should be increment or decrement"]
-            return GenericSingleResponse[SAEmployee](success=False, messages=error, status_code=422)
-        data = GenericSingleObject[SAEmployee](object=eotm.first())
-        if eotm:
-            return GenericSingleResponse[SAEmployee](success=True, data=data)
-        else:
-            error = ["Employee of The Month not found"]
-            return GenericSingleResponse[SAEmployee](success=False, messages=error, status_code=404)
+            payload = jwt.decode(access_token, SECRET_KEY, algorithms=["HS256"])
+            username: str = payload.get("username")
+            if username is None:
+                error = ["Unauthorized: Missing username"]
+                return GenericSingleResponse[SAEmployee](success=False, messages=error, status_code=401)   
+            eotm = db.query(SQLAlchemyEmployee).filter(
+                SQLAlchemyEmployee.is_eotm == True)
+            if mode == "increment":
+                eotm.update(
+                    {SQLAlchemyEmployee.number_of_likes: SQLAlchemyEmployee.number_of_likes+1})
+                db.commit()
+            elif mode == "decrement":
+                eotm.update(
+                    {SQLAlchemyEmployee.number_of_likes: SQLAlchemyEmployee.number_of_likes-1})
+                db.commit()
+            else:
+                error = [
+                    "Unprocessable entity: query parameter query_mode should be increment or decrement"]
+                return GenericSingleResponse[SAEmployee](success=False, messages=error, status_code=422)
+            data = GenericSingleObject[SAEmployee](object=eotm.first())
+            if eotm:
+                return GenericSingleResponse[SAEmployee](success=True, data=data)
+            else:
+                error = ["Employee of The Month not found"]
+                return GenericSingleResponse[SAEmployee](success=False, messages=error, status_code=404)
     except SQLAlchemyError as e:
         error = [f"Error occurred while querying database: {str(e)}"]
         return GenericSingleResponse[SAEmployee](success=False, messages=error, status_code=500)

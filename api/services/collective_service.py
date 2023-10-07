@@ -1,11 +1,12 @@
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import SQLAlchemyError
-from fastapi import HTTPException
+from fastapi import HTTPException, Request
 from models.employee_model import SQLAlchemyEmployee
 from models.eotmdetail_model import SQLAlchemyEOTMDetail
 from schemas.response_schema import GenericMultipleObjects, GenericMultipleResponse
 from schemas.eotmdetail_schema import EOTMDetailInput, SAEOTMDetail
-
+from services.auth_service import SECRET_KEY
+import jwt
 
 # API architecture as per request of Daniel Habib[Frontend dev]
 
@@ -33,8 +34,18 @@ def get_collective_data(db: Session):
 
 # As per Daniel's request, when posting a comment, this service returns all comments.
 
-def post_collective_comment(db: Session, eotm_detail: EOTMDetailInput) -> GenericMultipleResponse[SAEOTMDetail]:
+def post_collective_comment(db: Session, request: Request, eotm_detail: EOTMDetailInput) -> GenericMultipleResponse[SAEOTMDetail]:
     try:
+        access_token = request.headers.get("access_token")
+        if not access_token:
+            error = ["Unauthorized"]
+            return GenericMultipleResponse[SAEOTMDetail](success=False, messages=error, status_code=401)
+        else:
+            payload = jwt.decode(access_token, SECRET_KEY, algorithms=["HS256"])
+            username: str = payload.get("username")
+            if username is None:
+                error = ["Unauthorized: Missing username"]
+                return GenericMultipleResponse[SAEOTMDetail](success=False, messages=error, status_code=401)
         new_eotm_detail = SQLAlchemyEOTMDetail(**(eotm_detail.model_dump()))
         db.add(new_eotm_detail)
         db.commit()

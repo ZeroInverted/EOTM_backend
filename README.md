@@ -39,8 +39,24 @@ python manage.py runserver 7777
 cd api
 python fastapi_main
 ```
+## 3.0 Database Setup
 
-## 3.0 API Usage, Architecture
+3.1 Create a configuration file in the root directory of the project.
+```bash
+touch dbconfig.ini
+```
+
+3.2 Format your dbconfig.ini as follows:
+```
+[pg-database]
+name = db_name
+user = user_name
+password = user_password
+host = host_name
+port = port_number
+```
+
+## 4.0 API Usage, Architecture
 ```
 Visit <hostname>:<port>/docs for examples on how to use the APIs. 
 ```
@@ -50,6 +66,16 @@ e.g.,
 localhost:5555/docs for default settings.
 
 Also check the Postman collection for examples on how to send valid requests.
+
+## 5.0 Authentication
+The code is quite modular when it comes to Django and FastAPI depending on one another, except when it comes to authentication.
+
+The way users are authenticated is via a request made to FastAPI with credentials, said request is updated with a csrf token and is passed to Django auth system, the logout logic is similar.
+
+When the user is authenticated, a JWT is generated and can be used to like or comment on the Employee of The Month post, failure to add the JWT under the header "access_token" will result in a 401 "Unauthorized" response.
+
+
+In order to have working authentication with minimal code editing, run Django on port 7777 and FastAPI on port 5555.
 
 ## License
 
