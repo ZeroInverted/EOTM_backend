@@ -1,10 +1,12 @@
 from schemas.response_schema import GenericMultipleResponse
 from schemas.eotmdetail_schema import EOTMDetailInput, SAEOTMDetail
 from schemas.response_schema import GenericMultipleObjects, GenericMultipleResponse, GenericSingleObject, GenericSingleResponse
+from services.auth_service import SECRET_KEY
 from models.eotmdetail_model import SQLAlchemyEOTMDetail
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import SQLAlchemyError
-from fastapi import HTTPException
+from fastapi import HTTPException, Request
+import jwt
 
 
 def get_eotmdetail_data(db: Session) -> GenericMultipleResponse[SAEOTMDetail]:
@@ -28,8 +30,18 @@ def get_eotmdetail_data(db: Session) -> GenericMultipleResponse[SAEOTMDetail]:
         return GenericMultipleResponse[SAEOTMDetail](success=False, messages=error, status_code=500)
 
 
-def post_eotmdetail_data(db: Session, eotmdetail: EOTMDetailInput) -> GenericSingleResponse[SAEOTMDetail]:
+def post_eotmdetail_data(db: Session, request: Request, eotmdetail: EOTMDetailInput) -> GenericSingleResponse[SAEOTMDetail]:
     try:
+        access_token = request.headers.get("access_token")
+        if not access_token:
+            error = ["Unauthorized"]
+            return GenericSingleResponse[SAEOTMDetail](success=False, messages=error, status_code=401)
+        else:
+            payload = jwt.decode(access_token, SECRET_KEY, algorithms=["HS256"])
+            username: str = payload.get("username")
+            if username is None:
+                error = ["Unauthorized: Missing username"]
+                return GenericSingleResponse[SAEOTMDetail](success=False, messages=error, status_code=401)   
         new_eotmdetail = SQLAlchemyEOTMDetail(**(eotmdetail.model_dump()))
         db.add(new_eotmdetail)
         db.commit()
