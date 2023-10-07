@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Request
 from database import get_db
 from sqlalchemy.orm import Session
 from services.eotmdetail_service import get_eotmdetail_data, post_eotmdetail_data
@@ -14,5 +14,5 @@ def get_all_comments(db: Session = Depends(get_db)):
 
 
 @eotmdetail_router.post("/add_eotmdetail", response_model=GenericSingleResponse[SAEOTMDetail])
-def create_comment(eotmdetail: EOTMDetailInput, db: Session = Depends(get_db)):
-    return post_eotmdetail_data(db, eotmdetail)
+def create_comment(eotmdetail: EOTMDetailInput, request: Request, db: Session = Depends(get_db)):
+    return post_eotmdetail_data(db=db, request=request, eotmdetail=eotmdetail)
