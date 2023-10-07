@@ -8,5 +8,5 @@ class LoginModel(BaseModel):
 class LoginAuthResponse(BaseModel):
     access_token: str | None
     
-class LogoutAuthResponse(BaseModel):
+class GeneralAuthResponse(BaseModel):
     success: bool
