@@ -10,6 +10,6 @@ def auth_login(login_credentials: LoginModel):
     return employee_login(login_credentials=login_credentials)
 
 @auth_router.post("/employee_logout", response_model=GeneralAuthResponse)
-def auth_login():
+def auth_logout():
     return employee_logout()
 
