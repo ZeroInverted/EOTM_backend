@@ -1,6 +1,8 @@
 from schemas.auth_schema import LoginModel
 import requests
 
+SECRET_KEY = "django-insecure-@02$-!cc4n*!1!2ib4w&6*2!d^d6tv#664-ulc2-hx-^0g+xg1"
+
 def employee_login(login_credentials: LoginModel) -> dict:
     # Hit Django with GET to fetch a csrf token,
     get_csrf = requests.get("http://localhost:7777/login/")
