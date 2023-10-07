@@ -29,13 +29,65 @@
 				},
 				"description": "Returns all comments over the current EOTM winner post."
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Get all comments",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5555/eotmdetail/get_eotmdetail",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5555",
+							"path": [
+								"eotmdetail",
+								"get_eotmdetail"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "date",
+							"value": "Sat, 07 Oct 2023 21:32:29 GMT"
+						},
+						{
+							"key": "server",
+							"value": "uvicorn"
+						},
+						{
+							"key": "content-length",
+							"value": "315"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"messages\": null,\n    \"status_code\": 200,\n    \"data\": {\n        \"objects\": [\n            {\n                \"comment_detail\": \"Please make sure to add access_token that you can get from login\",\n                \"commentor\": \"Mr. Commentor\",\n                \"id\": 13\n            },\n            {\n                \"comment_detail\": \"Please make sure to add access_token that you can get from login\",\n                \"commentor\": \"Mr. Commentor\",\n                \"id\": 14\n            }\n        ]\n    }\n}"
+				}
+			]
 		},
 		{
 			"name": "Add a new comment",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "access_token",
+						"value": "",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\r\n  \"comment_detail\": \"Commenting for fun\",\r\n  \"commentor\": \"Mr. Commentor\"\r\n}",
@@ -62,7 +114,122 @@
 				},
 				"description": "Adds a new comment on the EOTM winner post."
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Unauthorized comment",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"comment_detail\": \"Commenting for fun\",\r\n  \"commentor\": \"Mr. Commentor\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5555/eotmdetail/add_eotmdetail",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5555",
+							"path": [
+								"eotmdetail",
+								"add_eotmdetail"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "date",
+							"value": "Sat, 07 Oct 2023 21:32:47 GMT"
+						},
+						{
+							"key": "server",
+							"value": "uvicorn"
+						},
+						{
+							"key": "content-length",
+							"value": "75"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": false,\n    \"messages\": [\n        \"Unauthorized\"\n    ],\n    \"status_code\": 401,\n    \"data\": null\n}"
+				},
+				{
+					"name": "Add a new comment",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "access_token",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"comment_detail\": \"Commenting for fun\",\r\n  \"commentor\": \"Mr. Commentor\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5555/eotmdetail/add_eotmdetail",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5555",
+							"path": [
+								"eotmdetail",
+								"add_eotmdetail"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "date",
+							"value": "Sat, 07 Oct 2023 21:35:01 GMT"
+						},
+						{
+							"key": "server",
+							"value": "uvicorn"
+						},
+						{
+							"key": "content-length",
+							"value": "144"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"messages\": null,\n    \"status_code\": 200,\n    \"data\": {\n        \"object\": {\n            \"comment_detail\": \"Commenting for fun\",\n            \"commentor\": \"Mr. Commentor\",\n            \"id\": 16\n        }\n    }\n}"
+				}
+			]
 		}
 	]
 }

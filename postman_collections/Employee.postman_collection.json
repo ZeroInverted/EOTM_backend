@@ -29,7 +29,53 @@
 				},
 				"description": "Returns the current winner of the employee of the month spot"
 			},
-			"response": []
+			"response": [
+				{
+					"name": "get employee of the month",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5555/employee/get_eotm",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5555",
+							"path": [
+								"employee",
+								"get_eotm"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "date",
+							"value": "Sat, 07 Oct 2023 21:35:57 GMT"
+						},
+						{
+							"key": "server",
+							"value": "uvicorn"
+						},
+						{
+							"key": "content-length",
+							"value": "304"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"messages\": null,\n    \"status_code\": 200,\n    \"data\": {\n        \"object\": {\n            \"first_name\": \"Mahmoud\",\n            \"last_name\": \"Fathy\",\n            \"job_title\": \"SWE\",\n            \"current_month_recommends\": 120,\n            \"total_recommends\": 150,\n            \"number_of_likes\": 3,\n            \"eotm_wins\": 154,\n            \"is_eotm\": true,\n            \"image_url\": \"http://127.0.0.1:7777/media/mahmoud_fathy.jpeg\",\n            \"id\": 1\n        }\n    }\n}"
+				}
+			]
 		},
 		{
 			"name": "get hall of famers",
@@ -37,7 +83,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:5555/employee/get_hof?query_type=wins&number_limit=5",
+					"raw": "http://127.0.0.1:5555/employee/get_hof?query_type=wins&number_limit=3",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -58,20 +104,84 @@
 						},
 						{
 							"key": "number_limit",
-							"value": "5",
+							"value": "3",
 							"description": "number of hall of famers to return, default: 5"
 						}
 					]
 				},
 				"description": "Returns a specified number of hall of famers, based on their win counter for the employee of the month title or the count of recommendations they have received by other employees"
 			},
-			"response": []
+			"response": [
+				{
+					"name": "get hall of famers",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5555/employee/get_hof?query_type=wins&number_limit=3",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5555",
+							"path": [
+								"employee",
+								"get_hof"
+							],
+							"query": [
+								{
+									"key": "query_type",
+									"value": "wins",
+									"description": "filter by wins or recommendationm count; default:wins, options: wins / recommends"
+								},
+								{
+									"key": "number_limit",
+									"value": "3",
+									"description": "number of hall of famers to return, default: 5"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "date",
+							"value": "Sat, 07 Oct 2023 21:36:30 GMT"
+						},
+						{
+							"key": "server",
+							"value": "uvicorn"
+						},
+						{
+							"key": "content-length",
+							"value": "700"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"messages\": null,\n    \"status_code\": 200,\n    \"data\": {\n        \"objects\": [\n            {\n                \"first_name\": \"Abdallah\",\n                \"last_name\": \"Ahmed\",\n                \"job_title\": \"Senior SWE\",\n                \"current_month_recommends\": 160,\n                \"total_recommends\": 160,\n                \"number_of_likes\": 0,\n                \"eotm_wins\": 160,\n                \"is_eotm\": false,\n                \"image_url\": null,\n                \"id\": 6\n            },\n            {\n                \"first_name\": \"Mahmoud\",\n                \"last_name\": \"Fathy\",\n                \"job_title\": \"SWE\",\n                \"current_month_recommends\": 120,\n                \"total_recommends\": 150,\n                \"number_of_likes\": 3,\n                \"eotm_wins\": 154,\n                \"is_eotm\": true,\n                \"image_url\": \"http://127.0.0.1:7777/media/mahmoud_fathy.jpeg\",\n                \"id\": 1\n            },\n            {\n                \"first_name\": \"Daniel\",\n                \"last_name\": \"Habib\",\n                \"job_title\": \"SWE\",\n                \"current_month_recommends\": 140,\n                \"total_recommends\": 140,\n                \"number_of_likes\": 0,\n                \"eotm_wins\": 140,\n                \"is_eotm\": false,\n                \"image_url\": null,\n                \"id\": 2\n            }\n        ]\n    }\n}"
+				}
+			]
 		},
 		{
 			"name": "patch like count for eotm",
 			"request": {
 				"method": "PATCH",
-				"header": [],
+				"header": [
+					{
+						"key": "access_token",
+						"value": "",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "http://127.0.0.1:5555/employee/patch_like_count?query_mode=increment",
 					"protocol": "http",
@@ -96,7 +206,118 @@
 				},
 				"description": "Increment or decrement the like count over the eotm post"
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Unauthorized like",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5555/employee/patch_like_count?query_mode=increment",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5555",
+							"path": [
+								"employee",
+								"patch_like_count"
+							],
+							"query": [
+								{
+									"key": "query_mode",
+									"value": "increment",
+									"description": "mode of operation, acceptable values: increment / decrement"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "date",
+							"value": "Sat, 07 Oct 2023 21:40:05 GMT"
+						},
+						{
+							"key": "server",
+							"value": "uvicorn"
+						},
+						{
+							"key": "content-length",
+							"value": "75"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": false,\n    \"messages\": [\n        \"Unauthorized\"\n    ],\n    \"status_code\": 401,\n    \"data\": null\n}"
+				},
+				{
+					"name": "patch like count for eotm",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "access_token",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:5555/employee/patch_like_count?query_mode=increment",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5555",
+							"path": [
+								"employee",
+								"patch_like_count"
+							],
+							"query": [
+								{
+									"key": "query_mode",
+									"value": "increment",
+									"description": "mode of operation, acceptable values: increment / decrement"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "date",
+							"value": "Sat, 07 Oct 2023 21:40:41 GMT"
+						},
+						{
+							"key": "server",
+							"value": "uvicorn"
+						},
+						{
+							"key": "content-length",
+							"value": "304"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"messages\": null,\n    \"status_code\": 200,\n    \"data\": {\n        \"object\": {\n            \"first_name\": \"Mahmoud\",\n            \"last_name\": \"Fathy\",\n            \"job_title\": \"SWE\",\n            \"current_month_recommends\": 120,\n            \"total_recommends\": 150,\n            \"number_of_likes\": 4,\n            \"eotm_wins\": 154,\n            \"is_eotm\": true,\n            \"image_url\": \"http://127.0.0.1:7777/media/mahmoud_fathy.jpeg\",\n            \"id\": 1\n        }\n    }\n}"
+				}
+			]
 		}
 	]
 }

@@ -1,0 +1,185 @@
+{
+	"info": {
+		"_postman_id": "9973a304-dc1e-4cbd-9bcf-39fdf5180ea1",
+		"name": "Authentication",
+		"description": "Authenticates the user with Django's auth system.\n\nRequests are made to FastAPI's auth/employee_login and auth/employee_logout endpoints.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29779843"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-CSRFToken",
+						"value": "3bdbmEGCcjXy5AIJaN9S0CTho8ieOD4k",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"string\",\r\n    \"password\": \"string\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5555/auth/employee_login/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5555",
+					"path": [
+						"auth",
+						"employee_login",
+						""
+					]
+				},
+				"description": "A get request is made to Django to fetch csrf token to be used when posting user's credentials against Django's auth.\n\nIf the request is succesful an access_token is returned, which can then be used to comment on or like the EOTM post."
+			},
+			"response": [
+				{
+					"name": "Login",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-CSRFToken",
+								"value": "3bdbmEGCcjXy5AIJaN9S0CTho8ieOD4k",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"string\",\r\n    \"password\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5555/auth/employee_login/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5555",
+							"path": [
+								"auth",
+								"employee_login",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "date",
+							"value": "Sat, 07 Oct 2023 21:24:59 GMT"
+						},
+						{
+							"key": "server",
+							"value": "uvicorn"
+						},
+						{
+							"key": "content-length",
+							"value": "130"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"access_token\": \"value\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Logout",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5555/auth/employee_logout/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5555",
+					"path": [
+						"auth",
+						"employee_logout",
+						""
+					]
+				},
+				"description": "A get request is made to Django to fetch csrf token to be used when posting the logout action to Django's auth system."
+			},
+			"response": [
+				{
+					"name": "Logout",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5555/auth/employee_logout/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5555",
+							"path": [
+								"auth",
+								"employee_logout",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "date",
+							"value": "Sat, 07 Oct 2023 21:27:09 GMT"
+						},
+						{
+							"key": "server",
+							"value": "uvicorn"
+						},
+						{
+							"key": "content-length",
+							"value": "16"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true\n}"
+				}
+			]
+		}
+	]
+}

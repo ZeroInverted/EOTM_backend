@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "81ad52ee-b73f-44fe-8a12-56736fa60917",
 		"name": "Collective",
-		"description": "API set requested by Daniel Habib \\[Frontend dev\\[",
+		"description": "API set requested by Daniel Habib \\[Frontend dev\\]",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "29779843"
 	},
@@ -29,16 +29,68 @@
 				},
 				"description": "Returns a mixture of employee of the month details as well as the comments over the post concatenated."
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Get Collective EOTM and comment",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5555/collective/get_collective_data",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5555",
+							"path": [
+								"collective",
+								"get_collective_data"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "date",
+							"value": "Sat, 07 Oct 2023 21:30:41 GMT"
+						},
+						{
+							"key": "server",
+							"value": "uvicorn"
+						},
+						{
+							"key": "content-length",
+							"value": "520"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"employee\": {\n        \"job_title\": \"SWE\",\n        \"last_name\": \"Fathy\",\n        \"total_recommends\": 150,\n        \"eotm_wins\": 154,\n        \"image_url\": \"http://127.0.0.1:7777/media/mahmoud_fathy.jpeg\",\n        \"first_name\": \"Mahmoud\",\n        \"id\": 1,\n        \"current_month_recommends\": 120,\n        \"number_of_likes\": 3,\n        \"is_eotm\": true\n    },\n    \"comments\": [\n        {\n            \"comment_detail\": \"Please make sure to add access_token that you can get from login\",\n            \"id\": 13,\n            \"commentor\": \"Mr. Commentor\"\n        },\n        {\n            \"comment_detail\": \"Please make sure to add access_token that you can get from login\",\n            \"id\": 14,\n            \"commentor\": \"Mr. Commentor\"\n        }\n    ]\n}"
+				}
+			]
 		},
 		{
 			"name": "Post collective comment",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "access_token",
+						"value": "",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"comment_detail\": \"This is a comment\",\r\n  \"commentor\": \"Mr. Commentor\"\r\n}",
+					"raw": "{\r\n  \"comment_detail\": \"Please make sure to add access_token that you can get from login\",\r\n  \"commentor\": \"Mr. Commentor\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -62,7 +114,128 @@
 				},
 				"description": "Returns all comments upon successful insertion of a new comment."
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Post collective comment",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "access_token",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"comment_detail\": \"Please make sure to add access_token that you can get from login\",\r\n  \"commentor\": \"Mr. Commentor\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5555/collective/post_collective_comment",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5555",
+							"path": [
+								"collective",
+								"post_collective_comment"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "date",
+							"value": "Sat, 07 Oct 2023 21:29:58 GMT"
+						},
+						{
+							"key": "server",
+							"value": "uvicorn"
+						},
+						{
+							"key": "content-length",
+							"value": "315"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"messages\": null,\n    \"status_code\": 200,\n    \"data\": {\n        \"objects\": [\n            {\n                \"comment_detail\": \"Please make sure to add access_token that you can get from login\",\n                \"commentor\": \"Mr. Commentor\",\n                \"id\": 13\n            },\n            {\n                \"comment_detail\": \"Please make sure to add access_token that you can get from login\",\n                \"commentor\": \"Mr. Commentor\",\n                \"id\": 14\n            }\n        ]\n    }\n}"
+				},
+				{
+					"name": "Unauthorized comment",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "access_token",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"comment_detail\": \"Please make sure to add access_token that you can get from login\",\r\n  \"commentor\": \"Mr. Commentor\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5555/collective/post_collective_comment",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5555",
+							"path": [
+								"collective",
+								"post_collective_comment"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "date",
+							"value": "Sat, 07 Oct 2023 21:33:32 GMT"
+						},
+						{
+							"key": "server",
+							"value": "uvicorn"
+						},
+						{
+							"key": "content-length",
+							"value": "75"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": false,\n    \"messages\": [\n        \"Unauthorized\"\n    ],\n    \"status_code\": 401,\n    \"data\": null\n}"
+				}
+			]
 		}
 	]
 }
