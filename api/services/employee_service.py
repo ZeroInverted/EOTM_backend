@@ -97,3 +97,41 @@ def change_like_count(db: Session, mode: str, request: Request) -> GenericSingle
     except Exception as e:
         error = [f"An error has occurred: {str(e)}"]
         return GenericSingleResponse[SAEmployee](success=False, messages=error, status_code=500)
+    
+def get_employee_data(db: Session, user_id: int) -> GenericSingleResponse[SAEmployee]:
+    try:
+        user = db.query(SQLAlchemyEmployee).filter(SQLAlchemyEmployee.id == user_id)
+        data = GenericSingleObject[SAEmployee](object=user.first())
+        return GenericSingleResponse[SAEmployee](success=True, data=data)
+    except SQLAlchemyError as e:
+        error = [f"Error occurred while querying database: {str(e)}"]
+        return GenericSingleResponse[SAEmployee](success=False, messages=error, status_code=500)
+    except HTTPException as e:
+        error = [f"HTTP exception has occurred: {str(e)}"]
+        return GenericSingleResponse[SAEmployee](success=False, messages=error, status_code=403)
+    except Exception as e:
+        error = [f"An error has occurred: {str(e)}"]
+        return GenericSingleResponse[SAEmployee](success=False, messages=error, status_code=500)   
+        
+def put_employee_data(db: Session, user_id: int, employee_data: SAEmployee) -> GenericSingleResponse[SAEmployee]:
+    try:
+        user = db.query(SQLAlchemyEmployee).filter(SQLAlchemyEmployee.id == user_id).first()
+        if not user:
+            error = [f"User with id: {user_id} is not found"]
+            return GenericSingleResponse[SAEmployee](success=False, messages=error, status_code=404)
+        else:
+            for key, value in employee_data.model_dump().items():
+                setattr(user, key, value)
+        db.commit()
+        db.refresh(user)
+        data = GenericSingleObject[SAEmployee](object=user)
+        return GenericSingleResponse[SAEmployee](success=True, data=data)
+    except SQLAlchemyError as e:
+        error = [f"Error occurred while querying database: {str(e)}"]
+        return GenericSingleResponse[SAEmployee](success=False, messages=error, status_code=500)
+    except HTTPException as e:
+        error = [f"HTTP exception has occurred: {str(e)}"]
+        return GenericSingleResponse[SAEmployee](success=False, messages=error, status_code=403)
+    except Exception as e:
+        error = [f"An error has occurred: {str(e)}"]
+        return GenericSingleResponse[SAEmployee](success=False, messages=error, status_code=500) 
