@@ -24,7 +24,7 @@ class EmployeeLogin(View):
             return JsonResponse({
                 "access_token": None,
             })
-        token = jwt.encode({"username": user.get_username()}, settings.SECRET_KEY)
+        token = jwt.encode({"id": request.user.id}, settings.SECRET_KEY)
         return JsonResponse({"access_token": token})
     
 class EmployeeLogout(View):
