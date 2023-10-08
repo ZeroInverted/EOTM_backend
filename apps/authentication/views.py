@@ -1,6 +1,5 @@
 from django.http import JsonResponse
 from django.views import View
-from django.views.decorators.csrf import csrf_exempt
 from django.middleware.csrf import get_token
 from django.contrib.auth import authenticate, login, logout
 from django.conf import settings
@@ -18,13 +17,14 @@ class EmployeeLogin(View):
         username = request_data.get("username")
         password = request_data.get("password")
         user = authenticate(request=request, username=username, password=password)
-        if user:
+        if user and user.is_authenticated:
             login(request, user)
+            user_id = user.id         
         else:
             return JsonResponse({
                 "access_token": None,
             })
-        token = jwt.encode({"id": request.user.id}, settings.SECRET_KEY)
+        token = jwt.encode({"id": user_id}, settings.SECRET_KEY)
         return JsonResponse({"access_token": token})
     
 class EmployeeLogout(View):
