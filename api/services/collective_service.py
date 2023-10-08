@@ -42,9 +42,9 @@ def post_collective_comment(db: Session, request: Request, eotm_detail: EOTMDeta
             return GenericMultipleResponse[SAEOTMDetail](success=False, messages=error, status_code=401)
         else:
             payload = jwt.decode(access_token, SECRET_KEY, algorithms=["HS256"])
-            username: str = payload.get("username")
-            if username is None:
-                error = ["Unauthorized: Missing username"]
+            user_id: str = payload.get("id")
+            if user_id is None:
+                error = ["Unauthorized: Missing ID"]
                 return GenericMultipleResponse[SAEOTMDetail](success=False, messages=error, status_code=401)
         new_eotm_detail = SQLAlchemyEOTMDetail(**(eotm_detail.model_dump()))
         db.add(new_eotm_detail)

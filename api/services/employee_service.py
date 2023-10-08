@@ -64,9 +64,9 @@ def change_like_count(db: Session, mode: str, request: Request) -> GenericSingle
             return GenericSingleResponse[SAEmployee](success=False, messages=error, status_code=401)
         else:
             payload = jwt.decode(access_token, SECRET_KEY, algorithms=["HS256"])
-            username: str = payload.get("username")
-            if username is None:
-                error = ["Unauthorized: Missing username"]
+            user_id: str = payload.get("id")
+            if user_id is None:
+                error = ["Unauthorized: Missing ID"]
                 return GenericSingleResponse[SAEmployee](success=False, messages=error, status_code=401)   
             eotm = db.query(SQLAlchemyEmployee).filter(
                 SQLAlchemyEmployee.is_eotm == True)
