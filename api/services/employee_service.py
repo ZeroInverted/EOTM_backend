@@ -1,5 +1,5 @@
 from schemas.response_schema import GenericMultipleResponse, GenericSingleResponse, GenericSingleObject, GenericMultipleObjects, GenericMultipleResponse
-from schemas.employee_schema import SAEmployee
+from schemas.employee_schema import SAEmployee, EmployeeInput
 from services.auth_service import SECRET_KEY
 from models.employee_model import SQLAlchemyEmployee
 from sqlalchemy.orm import Session
@@ -113,7 +113,7 @@ def get_employee_data(db: Session, user_id: int) -> GenericSingleResponse[SAEmpl
         error = [f"An error has occurred: {str(e)}"]
         return GenericSingleResponse[SAEmployee](success=False, messages=error, status_code=500)   
         
-def put_employee_data(db: Session, user_id: int, employee_data: SAEmployee) -> GenericSingleResponse[SAEmployee]:
+def put_employee_data(db: Session, user_id: int, employee_data: EmployeeInput) -> GenericSingleResponse[SAEmployee]:
     try:
         user = db.query(SQLAlchemyEmployee).filter(SQLAlchemyEmployee.id == user_id).first()
         if not user:

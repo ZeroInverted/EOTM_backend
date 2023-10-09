@@ -3,7 +3,7 @@ from database import get_db
 from sqlalchemy.orm import Session
 from services.employee_service import get_eotm_data, get_hof_data, change_like_count, get_employee_data, put_employee_data
 from schemas.response_schema import GenericSingleResponse, GenericMultipleResponse
-from schemas.employee_schema import SAEmployee
+from schemas.employee_schema import SAEmployee, EmployeeInput
 
 employee_router = APIRouter()
 
@@ -22,7 +22,7 @@ def get_employee_by_id(user_id: int, db: Session = Depends(get_db)):
     return get_employee_data(db=db, user_id=user_id)
 
 @employee_router.put("/update_employee", response_model=GenericSingleResponse[SAEmployee])
-def put_employee_by_id(user_id: int, employee_data: SAEmployee, db: Session = Depends(get_db)):
+def put_employee_by_id(user_id: int, employee_data: EmployeeInput, db: Session = Depends(get_db)):
     return put_employee_data(db=db, user_id=user_id, employee_data=employee_data)
 
 @employee_router.patch("/patch_like_count", response_model=GenericSingleResponse[SAEmployee])
