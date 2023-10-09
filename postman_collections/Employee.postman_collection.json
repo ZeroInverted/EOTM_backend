@@ -8,7 +8,7 @@
 	},
 	"item": [
 		{
-			"name": "get employee of the month",
+			"name": "Get Employee of The Month",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -31,7 +31,7 @@
 			},
 			"response": [
 				{
-					"name": "get employee of the month",
+					"name": "Get Employee of The Month",
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
@@ -78,7 +78,7 @@
 			]
 		},
 		{
-			"name": "get hall of famers",
+			"name": "Get Hall of Famers",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -113,7 +113,7 @@
 			},
 			"response": [
 				{
-					"name": "get hall of famers",
+					"name": "Get Hall of Famers",
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
@@ -172,7 +172,7 @@
 			]
 		},
 		{
-			"name": "patch like count for eotm",
+			"name": "Patch Like Count for Eotm",
 			"request": {
 				"method": "PATCH",
 				"header": [
@@ -260,7 +260,7 @@
 					"body": "{\n    \"success\": false,\n    \"messages\": [\n        \"Unauthorized\"\n    ],\n    \"status_code\": 401,\n    \"data\": null\n}"
 				},
 				{
-					"name": "patch like count for eotm",
+					"name": "Patch Like Count for Eotm",
 					"originalRequest": {
 						"method": "PATCH",
 						"header": [
@@ -316,6 +316,188 @@
 					],
 					"cookie": [],
 					"body": "{\n    \"success\": true,\n    \"messages\": null,\n    \"status_code\": 200,\n    \"data\": {\n        \"object\": {\n            \"first_name\": \"Mahmoud\",\n            \"last_name\": \"Fathy\",\n            \"job_title\": \"SWE\",\n            \"current_month_recommends\": 120,\n            \"total_recommends\": 150,\n            \"number_of_likes\": 4,\n            \"eotm_wins\": 154,\n            \"is_eotm\": true,\n            \"image_url\": \"http://127.0.0.1:7777/media/mahmoud_fathy.jpeg\",\n            \"id\": 1\n        }\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Get Employee by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5555/employee/get_employee?user_id=1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5555",
+					"path": [
+						"employee",
+						"get_employee"
+					],
+					"query": [
+						{
+							"key": "user_id",
+							"value": "1"
+						}
+					]
+				},
+				"description": "Fetch an employee's profile data."
+			},
+			"response": [
+				{
+					"name": "Get Employee by ID",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5555/employee/get_employee?user_id=1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5555",
+							"path": [
+								"employee",
+								"get_employee"
+							],
+							"query": [
+								{
+									"key": "user_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "date",
+							"value": "Mon, 09 Oct 2023 02:05:06 GMT"
+						},
+						{
+							"key": "server",
+							"value": "uvicorn"
+						},
+						{
+							"key": "content-length",
+							"value": "423"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"messages\": null,\n    \"status_code\": 200,\n    \"data\": {\n        \"object\": {\n            \"first_name\": \"Mahmoud\",\n            \"last_name\": \"Fathy\",\n            \"email\": \"admin@admin.com\",\n            \"job_title\": \"SWE\",\n            \"description\": \"Mahmoud has joined ITWorx in June 2023, he has been a Python SWE since then.\",\n            \"current_month_recommends\": 121,\n            \"total_recommends\": 154,\n            \"number_of_likes\": 0,\n            \"eotm_wins\": 156,\n            \"is_eotm\": true,\n            \"image_url\": \"http://127.0.0.1:7777/media/mahmoud_fathy.jpeg\",\n            \"id\": 1\n        }\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Put Employee by ID",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"first_name\": \"Mahmoud\",\r\n    \"last_name\": \"Fathy\",\r\n    \"email\": \"admin@admin.com\",\r\n    \"job_title\": \"SWE\",\r\n    \"description\": \"Mahmoud has joined ITWorx in June 2023, he has been a Python SWE since then.\",\r\n    \"current_month_recommends\": 125,\r\n    \"total_recommends\": 154,\r\n    \"number_of_likes\": 0,\r\n    \"eotm_wins\": 156,\r\n    \"is_eotm\": true,\r\n    \"image_url\": \"http://127.0.0.1:7777/media/mahmoud_fathy.jpeg\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5555/employee/update_employee?user_id=1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5555",
+					"path": [
+						"employee",
+						"update_employee"
+					],
+					"query": [
+						{
+							"key": "user_id",
+							"value": "1"
+						}
+					]
+				},
+				"description": "Allows to update certain employee details to allow for profile editing."
+			},
+			"response": [
+				{
+					"name": "Put Employee by ID",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"first_name\": \"Mahmoud\",\r\n    \"last_name\": \"Fathy\",\r\n    \"email\": \"admin@admin.com\",\r\n    \"job_title\": \"SWE\",\r\n    \"description\": \"Mahmoud has joined ITWorx in June 2023, he has been a Python SWE since then.\",\r\n    \"current_month_recommends\": 125,\r\n    \"total_recommends\": 154,\r\n    \"number_of_likes\": 0,\r\n    \"eotm_wins\": 156,\r\n    \"is_eotm\": true,\r\n    \"image_url\": \"http://127.0.0.1:7777/media/mahmoud_fathy.jpeg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5555/employee/update_employee?user_id=1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5555",
+							"path": [
+								"employee",
+								"update_employee"
+							],
+							"query": [
+								{
+									"key": "user_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "date",
+							"value": "Mon, 09 Oct 2023 02:08:45 GMT"
+						},
+						{
+							"key": "server",
+							"value": "uvicorn"
+						},
+						{
+							"key": "content-length",
+							"value": "423"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"messages\": null,\n    \"status_code\": 200,\n    \"data\": {\n        \"object\": {\n            \"first_name\": \"Mahmoud\",\n            \"last_name\": \"Fathy\",\n            \"email\": \"admin@admin.com\",\n            \"job_title\": \"SWE\",\n            \"description\": \"Mahmoud has joined ITWorx in June 2023, he has been a Python SWE since then.\",\n            \"current_month_recommends\": 125,\n            \"total_recommends\": 154,\n            \"number_of_likes\": 0,\n            \"eotm_wins\": 156,\n            \"is_eotm\": true,\n            \"image_url\": \"http://127.0.0.1:7777/media/mahmoud_fathy.jpeg\",\n            \"id\": 1\n        }\n    }\n}"
 				}
 			]
 		}

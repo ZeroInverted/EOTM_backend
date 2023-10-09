@@ -78,7 +78,7 @@
 			]
 		},
 		{
-			"name": "Post collective comment",
+			"name": "Post Collective Comment",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -116,7 +116,7 @@
 			},
 			"response": [
 				{
-					"name": "Post collective comment",
+					"name": "Post Collective Comment",
 					"originalRequest": {
 						"method": "POST",
 						"header": [
