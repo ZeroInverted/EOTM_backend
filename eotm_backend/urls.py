@@ -18,12 +18,13 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from apps.authentication.views import EmployeeLogin, EmployeeLogout
+from apps.authentication.views import EmployeeLogin, EmployeeLogout, EmployeePasswordReset
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("login/", EmployeeLogin.as_view(), name="employee_login"),
-    path("logout/", EmployeeLogout.as_view(), name="employee_logout")
+    path("logout/", EmployeeLogout.as_view(), name="employee_logout"),
+    path("passwordreset/", EmployeePasswordReset.as_view(), name="employee_password_reset")
 ]
 # Append to the patterns the urls of the media files in BASE_DIR/media to serve images
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
