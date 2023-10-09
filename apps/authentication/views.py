@@ -52,9 +52,8 @@ class EmployeePasswordReset(View):
         try:
             request_data = json.loads(request.body)
             user_username = request_data.get("username")
-            new_password = request_data.get("new_password")
+            new_password = request_data.get("password")
             user = Employee.objects.get(username = user_username)
-            print(user_username, new_password, user)
             if not user:
                 return JsonResponse({"success":"False"})
             else:
