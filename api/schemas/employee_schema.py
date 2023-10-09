@@ -4,7 +4,9 @@ from pydantic import BaseModel
 class EmployeeBase(BaseModel):
     first_name: str
     last_name: str
-    job_title: str
+    email: str | None
+    job_title: str | None
+    description: str | None
     current_month_recommends: int
     total_recommends: int
     number_of_likes: int
