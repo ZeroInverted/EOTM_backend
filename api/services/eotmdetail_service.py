@@ -38,7 +38,7 @@ def post_eotmdetail_data(db: Session, request: Request, eotmdetail: EOTMDetailIn
             return GenericSingleResponse[SAEOTMDetail](success=False, messages=error, status_code=401)
         else:
             payload = jwt.decode(access_token, SECRET_KEY, algorithms=["HS256"])
-            user_name: str = payload.get("ID")
+            user_name: str = payload.get("id")
             if user_name is None:
                 error = ["Unauthorized: Missing ID"]
                 return GenericSingleResponse[SAEOTMDetail](success=False, messages=error, status_code=401)   
