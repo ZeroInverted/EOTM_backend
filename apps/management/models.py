@@ -13,6 +13,7 @@ class Employee(AbstractUser):
     number_of_likes = models.PositiveIntegerField(default=0)
     image = models.ImageField(null=True, blank=True)
     image_url = models.CharField(max_length=200, null=True, blank=True)
+    description = models.TextField(max_length=600, null=True, blank=True)
 
     class Meta:
         verbose_name = "Employee"
